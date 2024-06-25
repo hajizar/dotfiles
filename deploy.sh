@@ -12,4 +12,3 @@ XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 ln -sf "$DOTFILES_DIR/.config/bash/.bashrc" "$HOME/.bashrc"
 ln -sf "$DOTFILES_DIR/.config/tmux/.tmux.conf" "$HOME/.tmux.conf"
 ln -sf "$DOTFILES_DIR/.config/nvim" "$XDG_CONFIG_HOME/nvim"
-
