@@ -7,14 +7,14 @@ XDG_CONFIG_HOME ?= $(HOME)/.config
 .PHONY: alacritty
 ## alacritty: Setup symlink for alacritty
 alacritty:
-	@rm -rf $(XDG_CONFIG_HOME)/alacritty
+	rm -rf $(XDG_CONFIG_HOME)/alacritty
 	ln -sf "$(CONFIG_DIR)/alacritty/$(UNAME)/alacritty.toml" "$(CONFIG_DIR)/alacritty/alacritty.toml"; \
 	ln -sf "$(CONFIG_DIR)/alacritty" "$(XDG_CONFIG_HOME)/alacritty"
 
 .PHONY: bashrc
 ## bashrc: Setup symlink for .bashrc
 bashrc:
-	@if [[ ! -d "$(HOME)/.oh-my-bash" ]]; then \
+	if [ ! -d "$(HOME)/.oh-my-bash" ]; then \
 		git clone https://github.com/ohmybash/oh-my-bash.git $(HOME)/.oh-my-bash; \
 	fi
 	rm -f $(HOME)/.bashrc.conf
@@ -23,7 +23,7 @@ bashrc:
 .PHONY: config
 ## config: Setup user configuration
 config:
-	@if [ "$(UNAME)" = "Linux" ]; then \
+	if [ "$(UNAME)" = "Linux" ]; then \
 			$(MAKE) config-linux; \
 	elif [ "$(UNAME)" = "Darwin" ]; then \
 			$(MAKE) config-darwin; \
@@ -38,7 +38,7 @@ config-linux: bashrc gitconfig nvim tmux
 .PHONY: fonts
 ## fonts: Setup nerd fonts
 fonts:
-	@if [ "$(UNAME)" = "Linux" ]; then \
+	if [ "$(UNAME)" = "Linux" ]; then \
 			$(MAKE) fonts-linux; \
 	elif [ "$(UNAME)" = "Darwin" ]; then \
 			$(MAKE) fonts-darwin; \
@@ -46,7 +46,7 @@ fonts:
 
 .PHONY: fonts-darwin
 fonts-darwin:
-	@wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/CascadiaMono.zip
+	wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/CascadiaMono.zip
 	unzip CascadiaMono.zip -d CascadiaFont
 	cp CascadiaFont/*.ttf $(HOME)/Library/Fonts/
 	rm -rf CascadiaMono.zip CascadiaFont
@@ -61,7 +61,7 @@ fonts-darwin:
 
 .PHONY: fonts-linux
 fonts-linux:
-	@wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/CascadiaMono.zip
+	wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/CascadiaMono.zip
 	unzip CascadiaMono.zip -d CascadiaFont
 	cp CascadiaFont/*.ttf $(HOME)/.local/share/fonts
 	rm -rf CascadiaMono.zip CascadiaFont
@@ -78,13 +78,13 @@ fonts-linux:
 .PHONY: gitconfig
 ## gitconfig: Setup symlink for gitconfig
 gitconfig:
-	@rm -f $(HOME)/.gitconfig
+	rm -f $(HOME)/.gitconfig
 	ln -sf "$(CONFIG_DIR)/git/.gitconfig" "$(HOME)/.gitconfig"
 
 .PHONY: nvim
 ## nvim: Setup symlink for nvim configuration
 nvim:
-	@rm -rf $(XDG_CONFIG_HOME)/nvim
+	rm -rf $(XDG_CONFIG_HOME)/nvim
 	ln -sf "$(CONFIG_DIR)/nvim" "$(XDG_CONFIG_HOME)/nvim"
 	if [ "$(UNAME)" = "Linux" ]; then \
 		sudo ln -sf "$(CONFIG_DIR)/nvim" "/root/.config/nvim"; \
@@ -93,13 +93,13 @@ nvim:
 .PHONY: tmux
 ## tmux: Setup symlink for tmux configuration
 tmux:
-	@rm -f $(HOME)/.tmux.conf
+	rm -f $(HOME)/.tmux.conf
 	ln -sf "$(CONFIG_DIR)/tmux/$(UNAME)/.tmux.conf" "$(HOME)/.tmux.conf"
 
 .PHONY: zshrc
 ## zshrc: Setup symlink for zsh configuration
 zshrc:
-	@rm -rf $(HOME)/.zshrc
+	rm -rf $(HOME)/.zshrc
 	rm -rf $(HOME)/.p10k.zsh
 	ln -sf "$(CONFIG_DIR)/zsh/.zshrc" "$(HOME)/.zshrc"
 	ln -sf "$(CONFIG_DIR)/zsh/.p10k.zsh" "$(HOME)/.p10k.zsh"
