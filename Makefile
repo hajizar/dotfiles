@@ -14,7 +14,10 @@ alacritty:
 .PHONY: bashrc
 ## bashrc: Setup symlink for .bashrc
 bashrc:
-	@rm -f $(HOME)/.bashrc.conf
+	@if [[ ! -d "$(HOME)/.oh-my-bash" ]]; then \
+		git clone https://github.com/ohmybash/oh-my-bash.git $(HOME)/.oh-my-bash; \
+	fi
+	rm -f $(HOME)/.bashrc.conf
 	ln -sf "$(CONFIG_DIR)/bash/.bashrc" "$(HOME)/.bashrc"
 
 .PHONY: config
@@ -97,9 +100,9 @@ tmux:
 ## zshrc: Setup symlink for zsh configuration
 zshrc:
 	@rm -rf $(HOME)/.zshrc
-	@rm -rf $(HOME)/.p10k.zsh
-	@ln -sf "$(CONFIG_DIR)/zsh/.zshrc" "$(HOME)/.zshrc"
-	@ln -sf "$(CONFIG_DIR)/zsh/.p10k.zsh" "$(HOME)/.p10k.zsh"
+	rm -rf $(HOME)/.p10k.zsh
+	ln -sf "$(CONFIG_DIR)/zsh/.zshrc" "$(HOME)/.zshrc"
+	ln -sf "$(CONFIG_DIR)/zsh/.p10k.zsh" "$(HOME)/.p10k.zsh"
 
 .PHONY: help
 ## help: Show help message
