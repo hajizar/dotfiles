@@ -60,9 +60,17 @@ alias fm='frogmouth'
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f $HOME/.p10k.zsh ]] || source $HOME/.p10k.zsh
 
-# Update PATH for the Google Cloud SDK.
+# Update PATH for the Google Cloud SDK
 if [ -f '$HOME/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/hajizada/google-cloud-sdk/path.zsh.inc'; fi
 
-# Enable shell command completion for gcloud.
+# Enable shell command completion for gcloud
 if [ -f '$HOME/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/hajizada/google-cloud-sdk/completion.zsh.inc'; fi
+
+# Enable shell command completion for packages installed with Homebrew
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+
+  autoload -Uz compinit
+  compinit
+fi
 
