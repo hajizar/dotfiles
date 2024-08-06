@@ -9,7 +9,7 @@ export OSH='/home/rufat.hajizada/.oh-my-bash'
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-bash is loaded.
-OSH_THEME="powerbash10k"
+OSH_THEME="brainy"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
@@ -34,9 +34,9 @@ OMB_PROMPT_SHOW_PYTHON_VENV=true # enable
 # Example format: completions=(ssh git bundler gem pip pip3)
 # Add wisely, as too many completions slow down shell startup.
 completions=(
-	git
-	composer
-	ssh
+  git
+  composer
+  ssh
 )
 
 # Which aliases would you like to load? (aliases can be found in ~/.oh-my-bash/aliases/*)
@@ -44,7 +44,7 @@ completions=(
 # Example format: aliases=(vagrant composer git-avh)
 # Add wisely, as too many aliases slow down shell startup.
 aliases=(
-	general
+  general
 )
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-bash/plugins/*)
@@ -52,8 +52,8 @@ aliases=(
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-	git
-	bashmarks
+  git
+  bashmarks
 )
 
 # make less more friendly for non-text input files, see lesspipe(1)
@@ -61,16 +61,16 @@ plugins=(
 
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-	debian_chroot=$(cat /etc/debian_chroot)
+  debian_chroot=$(cat /etc/debian_chroot)
 fi
 
 # autocompletion
 if ! shopt -oq posix; then
-	if [ -f /usr/share/bash-completion/bash_completion ]; then
-		. /usr/share/bash-completion/bash_completion
-	elif [ -f /etc/bash_completion ]; then
-		. /etc/bash_completion
-	fi
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
 fi
 
 source "$OSH"/oh-my-bash.sh
