@@ -22,27 +22,6 @@ return {
         },
         window_border = "single", -- Border style for the codewindow
       })
-
-      -- Bindings for opening and closing the minimap
-      vim.api.nvim_set_keymap(
-        "n",
-        "<leader>mm",
-        ':lua require("codewindow").toggle_minimap()<CR>',
-        { noremap = true, silent = true }
-      )
-      vim.api.nvim_set_keymap(
-        "n",
-        "<leader>mo",
-        ':lua require("codewindow").open_minimap()<CR>',
-        { noremap = true, silent = true }
-      )
-      vim.api.nvim_set_keymap(
-        "n",
-        "<leader>mc",
-        ':lua require("codewindow").close_minimap()<CR>',
-        { noremap = true, silent = true }
-      )
-
       codewindow.apply_default_keybinds()
     end,
   },
