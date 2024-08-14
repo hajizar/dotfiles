@@ -61,10 +61,10 @@ alias fm='frogmouth'
 [[ ! -f $HOME/.p10k.zsh ]] || source $HOME/.p10k.zsh
 
 # Update PATH for the Google Cloud SDK
-if [ -f '$HOME/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/hajizada/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/path.zsh.inc"; fi
 
 # Enable shell command completion for gcloud
-if [ -f '$HOME/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/hajizada/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
 
 # Enable shell command completion for packages installed with Homebrew
 if type brew &>/dev/null; then
