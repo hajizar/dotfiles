@@ -34,7 +34,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(alias-finder aliases brew dotenv git golang python)
+plugins=(alias-finder aliases brew dotenv git gitignore golang python)
 
 source $ZSH/oh-my-zsh.sh
 
