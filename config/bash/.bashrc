@@ -94,3 +94,4 @@ alias venv='source .venv/bin/activate'
 
 # User environment variables
 export PATH=$PATH:/snap/bin
+export PATH=$PATH:/$HOME/.cargo/bin
