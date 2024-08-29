@@ -89,9 +89,15 @@ alias dev='cd $HOME/Dev'
 alias lg='lazygit'
 alias requirements='pip install -m requirements.txt'
 alias vb='vim ~/.bashrc'
-alias vim='nvim'
 alias venv='source .venv/bin/activate'
+alias vim='nvim'
+alias vp='vim ~/.profile'
 
 # User environment variables
 export PATH=$PATH:/snap/bin
 export PATH=$PATH:/$HOME/.cargo/bin
+
+# Sourcing profile
+if [ -f "$HOME/.profile" ]; then
+  source "$HOME/.profile"
+fi

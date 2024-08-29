@@ -44,15 +44,15 @@ export PYTHONWARNINGS="ignore"
 
 # User aliases
 alias dev='cd ~/Dev --'
+alias fm='frogmouth'
+alias lg='lazygit'
+alias mkvenv='python3 -m virtualenv .venv'
+alias requirements='pip install -r requirements.txt'
+alias venv='source .venv/bin/activate'
 alias vim='nvim'
 alias vp='vim ~/.profile'
 alias vz='vim ~/.zshrc'
 alias zshrc='source ~/.zshrc'
-alias mkvenv='python3 -m virtualenv .venv'
-alias venv='source .venv/bin/activate'
-alias requirements='pip install -r requirements.txt'
-alias lg='lazygit'
-alias fm='frogmouth'
 
 # Source .profile if it exists
 [[ ! -f $HOME/.profile ]] || source $HOME/.profile
