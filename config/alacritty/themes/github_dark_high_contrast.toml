@@ -2,7 +2,7 @@
 
 # Default colors
 [colors.primary]
-background = '#0a0c10'
+background = '#000000'
 foreground = '#f0f3f6'
 
 # Cursor colors
@@ -31,4 +31,3 @@ blue = '#91cbff'
 magenta = '#cb9eff'
 cyan = '#39c5cf'
 white = '#d9dee3'
-
