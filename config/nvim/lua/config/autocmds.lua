@@ -4,7 +4,7 @@
 
 -- Disable auto formattin on save for python files
 vim.api.nvim_create_autocmd({ "FileType" }, {
-  pattern = { "python" },
+  pattern = { "python", "yaml" },
   callback = function()
     vim.b.autoformat = false
   end,
