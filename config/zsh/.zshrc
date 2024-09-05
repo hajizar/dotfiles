@@ -44,7 +44,6 @@ export PYTHONWARNINGS="ignore"
 
 # User aliases
 alias dev='cd ~/Dev --'
-alias fm='frogmouth'
 alias lg='lazygit'
 alias mkvenv='python3 -m virtualenv .venv'
 alias requirements='pip install -r requirements.txt'
@@ -77,4 +76,7 @@ if type brew &>/dev/null; then
   autoload -Uz compinit
   compinit
 fi
+
+# Shell integration for 'fzf'
+source <(fzf --zsh)
 

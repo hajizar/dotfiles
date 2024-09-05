@@ -20,6 +20,15 @@ bashrc:
 	rm -f $(HOME)/.bashrc.conf
 	ln -sf "$(CONFIG_DIR)/bash/.bashrc" "$(HOME)/.bashrc"
 
+.PHONY: brew
+## brew: Install brew and brew packages
+brew:
+	which brew >/dev/null 2>&1 || { \
+		echo "Homebrew not found, installing..."; \
+		/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; \
+	}
+	xargs brew install < $(DOTFILES_DIR)/requirements/brew/packages.txt
+
 .PHONY: config
 ## config: Setup user configuration
 config:

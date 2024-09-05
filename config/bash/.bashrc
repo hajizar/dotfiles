@@ -97,7 +97,3 @@ alias vp='vim ~/.profile'
 export PATH=$PATH:/snap/bin
 export PATH=$PATH:/$HOME/.cargo/bin
 
-# Sourcing profile
-if [ -f "$HOME/.profile" ]; then
-  source "$HOME/.profile"
-fi
