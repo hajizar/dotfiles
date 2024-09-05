@@ -24,8 +24,8 @@ bashrc:
 ## brew: Install brew and brew packages
 brew:
 	which brew >/dev/null 2>&1 || { \
-		echo "Homebrew not found, installing..."; \
 		/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; \
+		eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"; \
 	}
 	xargs brew install < $(DOTFILES_DIR)/requirements/brew/packages.txt
 

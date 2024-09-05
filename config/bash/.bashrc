@@ -97,3 +97,5 @@ alias vp='vim ~/.profile'
 export PATH=$PATH:/snap/bin
 export PATH=$PATH:/$HOME/.cargo/bin
 
+# Adding Homebrew
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
