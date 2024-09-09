@@ -5,6 +5,7 @@ fzf
 gh
 glow
 hashicorp/tap/packer
+hashicorp/tap/terraform
 jq
 lazydocker
 lazygit
@@ -18,7 +19,6 @@ ripgrep
 rsync
 rust
 tailspin
-terraform
 tmux
 tree
 w3m

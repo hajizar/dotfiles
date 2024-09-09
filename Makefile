@@ -29,6 +29,11 @@ brew:
 	}
 	xargs brew install < $(DOTFILES_DIR)/requirements/brew/packages.txt
 
+.PHONY: brew-sync
+## brew-sync: Update list of brew packages from current system
+brew-sync:
+	brew leaves > $(DOTFILES_DIR)/requirements/brew/packages.txt
+	
 .PHONY: config
 ## config: Setup user configuration
 config:
