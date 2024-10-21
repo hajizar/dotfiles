@@ -10,9 +10,6 @@ return {
             keywords = "bold",
             types = "italic,bold",
           },
-          inverse = {
-            visual = true,
-          },
         },
       })
     end,
