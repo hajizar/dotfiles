@@ -1,6 +1,4 @@
-import = [
-    "~/.config/alacritty/themes/github_dark_high_contrast.toml"
-]
+general.import = ["~/.config/alacritty/themes/github_dark_high_contrast.toml"]
 
 [font]
 normal = { family = "JetBrainsMono Nerd Font", style = "regular" }
