@@ -39,7 +39,12 @@ plugins=(alias-finder aliases brew dotenv git gitignore golang python)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-export PATH="$PATH:/opt/homebrew/bin:$HOME/go/bin:$HOME/.cargo/bin:/Library/Frameworks/Python.framework/Versions/3.11/bin"
+export PATH="$PATH:/opt/homebrew/bin"
+export PATH="$PATH:/opt/homebrew/opt/libpq/bin"
+export PATH="$HOME/go/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+
 export PYTHONWARNINGS="ignore"
 
 # User aliases
