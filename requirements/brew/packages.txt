@@ -19,7 +19,7 @@ llvm
 md5sha1sum
 micromamba
 neovim
-node
+nodenv
 python@3.11
 reattach-to-user-namespace
 ripgrep

@@ -50,7 +50,7 @@ export PYTHONWARNINGS="ignore"
 # User aliases
 alias dev='cd ~/Dev --'
 alias lg='lazygit'
-alias mkvenv='python3 -m virtualenv .venv'
+alias mkvenv='virtualenv .venv'
 alias requirements='pip install -r requirements.txt'
 alias venv='source .venv/bin/activate'
 alias vim='nvim'
@@ -85,3 +85,5 @@ fi
 # Shell integration for 'fzf'
 source <(fzf --zsh)
 
+# Initializing nodenv
+eval "$(nodenv init -)"
