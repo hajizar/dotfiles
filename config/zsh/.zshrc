@@ -57,6 +57,7 @@ alias vim='nvim'
 alias vp='vim ~/.profile'
 alias vz='vim ~/.zshrc'
 alias zshrc='source ~/.zshrc'
+alias fzf='fzf --tmux'
 
 # Source .profile if it exists
 [[ ! -f $HOME/.profile ]] || source $HOME/.profile
