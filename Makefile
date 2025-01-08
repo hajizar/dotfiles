@@ -52,42 +52,24 @@ config-linux: bashrc gitconfig nvim tmux
 .PHONY: fonts
 ## fonts: Setup nerd fonts
 fonts:
-	if [ "$(UNAME)" = "Linux" ]; then \
-			$(MAKE) fonts-linux; \
-	elif [ "$(UNAME)" = "Darwin" ]; then \
-			$(MAKE) fonts-darwin; \
-	fi
-
-.PHONY: fonts-darwin
-fonts-darwin:
-	wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/CascadiaMono.zip
-	unzip CascadiaMono.zip -d CascadiaFont
-	cp CascadiaFont/*.ttf $(HOME)/Library/Fonts/
-	rm -rf CascadiaMono.zip CascadiaFont
-	wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/JetBrainsMono.zip
-	unzip JetBrainsMono.zip -d JetBrainsMono
-	cp JetBrainsMono/*.ttf $(HOME)/Library/Fonts/
-	rm -rf JetBrainsMono.zip JetBrainsMono
-	wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/Meslo.zip
-	unzip Meslo.zip -d Meslo
-	cp Meslo/*ttf $(HOME)/Library/Fonts/
-	rm -rf Meslo.zip Meslo
-
-.PHONY: fonts-linux
-fonts-linux:
-	wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/CascadiaMono.zip
-	unzip CascadiaMono.zip -d CascadiaFont
-	cp CascadiaFont/*.ttf $(HOME)/.local/share/fonts
-	rm -rf CascadiaMono.zip CascadiaFont
-	wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/JetBrainsMono.zip
-	unzip JetBrainsMono.zip -d JetBrainsMono
-	cp JetBrainsMono/*.ttf $(HOME)/.local/share/fonts
-	rm -rf JetBrainsMono.zip JetBrainsMono
-	wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/Meslo.zip
-	unzip Meslo.zip -d Meslo
-	cp Meslo/*ttf $(HOME)/.local/share/fonts
-	rm -rf Meslo.zip Meslo
-	fc-cache
+	@if [ "$(UNAME)" = "Darwin" ]; then \
+		FONTS_DIR="$(HOME)/Library/Fonts"; \
+	elif [ "$(UNAME)" = "Linux" ]; then \
+		FONTS_DIR="$(HOME)/.local/share/fonts"; \
+	else \
+		echo "Unsupported OS: $(UNAME)"; exit 1; \
+	fi; \
+	cd /tmp && { \
+		for FONT in JetBrainsMono; do \
+			wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/$${FONT}.zip && \
+			unzip $${FONT}.zip -d $${FONT} && \
+			cp $${FONT}/*.ttf $${FONTS_DIR}/ && \
+			rm -rf $${FONT}.zip $${FONT}; \
+		done; \
+		if [ "$(UNAME)" = "Linux" ]; then \
+			fc-cache -fv; \
+		fi; \
+	}
 
 .PHONY: gitconfig
 ## gitconfig: Setup symlink for gitconfig
