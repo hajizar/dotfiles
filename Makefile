@@ -95,6 +95,12 @@ gitconfig:
 	rm -f $(HOME)/.gitconfig
 	ln -sf "$(CONFIG_DIR)/git/.gitconfig" "$(HOME)/.gitconfig"
 
+.PHONY: ghostty
+## ghostty: Setup symlink for ghostty
+ghostty:
+	rm -rf $(XDG_CONFIG_HOME)/ghostty
+	ln -sf "$(CONFIG_DIR)/ghostty" "$(XDG_CONFIG_HOME)/ghostty"
+
 .PHONY: nvim
 ## nvim: Setup symlink for nvim configuration
 nvim:
