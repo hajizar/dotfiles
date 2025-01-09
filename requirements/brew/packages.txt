@@ -26,6 +26,7 @@ ripgrep
 rsync
 rust
 rustup
+sevenzip
 tailspin
 tmux
 tree
