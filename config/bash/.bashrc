@@ -97,6 +97,7 @@ alias vp='vim ~/.profile'
 export PATH="$PATH:/snap/bin"
 export PATH="$PATH:/$HOME/.cargo/bin"
 export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
+export PATH="$PATH:/home/linuxbrew/.linuxbrew/opt/libpq/bin"
 
 # Linux brew setup
 if [ -d "/home/linuxbrew/.linuxbrew" ] && [ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
