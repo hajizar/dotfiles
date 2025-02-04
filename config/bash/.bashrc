@@ -94,8 +94,6 @@ alias vim='nvim'
 alias vp='vim ~/.profile'
 
 # User environment variables
-export PATH=$PATH:/snap/bin
-export PATH=$PATH:/$HOME/.cargo/bin
-
-# Adding Homebrew
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+export PATH="$PATH:/snap/bin"
+export PATH="$PATH:/$HOME/.cargo/bin"
+export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
