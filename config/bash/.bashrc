@@ -97,3 +97,18 @@ alias vp='vim ~/.profile'
 export PATH="$PATH:/snap/bin"
 export PATH="$PATH:/$HOME/.cargo/bin"
 export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
+
+# Linux brew setup
+if [ -d "/home/linuxbrew/.linuxbrew" ] && [ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+
+# Shell integration for 'fzf'
+if command -v fzf >/dev/null 2>&1; then
+  source <(fzf --bash)
+fi
+
+# Initializing nodenv
+if command -v fzf >/dev/null 2>&1; then
+  eval "$(nodenv init -)"
+fi
