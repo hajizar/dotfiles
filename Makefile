@@ -5,7 +5,7 @@ UNAME := "$(shell uname)"
 XDG_CONFIG_HOME ?= $(HOME)/.config
 
 .PHONY: alacritty
-## alacritty: Setup symlink for alacritty
+## alacritty: Setup symlink for alacritty configuration
 alacritty:
 	rm -rf $(XDG_CONFIG_HOME)/alacritty
 	ln -sf "$(CONFIG_DIR)/alacritty/$(UNAME)/alacritty.toml" "$(CONFIG_DIR)/alacritty/alacritty.toml"; \
@@ -38,16 +38,10 @@ brew-sync:
 ## config: Setup user configuration
 config:
 	if [ "$(UNAME)" = "Linux" ]; then \
-			$(MAKE) config-linux; \
+			$(MAKE) bashrc gitconfig nvim tmux; \
 	elif [ "$(UNAME)" = "Darwin" ]; then \
-			$(MAKE) config-darwin; \
+			$(MAKE) zshrc gitconfig nvim tmux ghostty; \
 	fi
-
-.PHONY: config-darwin
-config-darwin: alacritty gitconfig nvim tmux zshrc
-
-.PHONY: config-linux
-config-linux: bashrc gitconfig nvim tmux
 
 .PHONY: fonts
 ## fonts: Setup nerd fonts
