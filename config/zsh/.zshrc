@@ -49,16 +49,16 @@ export PATH="$HOME/.local/bin:$PATH"
 export PYTHONWARNINGS="ignore"
 
 # User aliases
-alias dev='cd ~/Dev --'
+alias fzf='fzf --tmux'
 alias lg='lazygit'
-alias mkvenv='virtualenv .venv'
-alias requirements='pip install -r requirements.txt'
+alias mkvenv='uv venv'
+alias requirements='uv pip install -r requirements.txt'
+alias tf='terraform'
 alias venv='source .venv/bin/activate'
 alias vim='nvim'
 alias vp='vim ~/.profile'
 alias vz='vim ~/.zshrc'
 alias zshrc='source ~/.zshrc'
-alias fzf='fzf --tmux'
 
 # Source .profile if it exists
 [[ ! -f $HOME/.profile ]] || source $HOME/.profile
