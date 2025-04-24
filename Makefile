@@ -81,10 +81,8 @@ ghostty:
 ## nvim: Setup neovim configuration
 nvim:
 	rm -rf $(XDG_CONFIG_HOME)/nvim
+	rm -rf $(HOME)/.local/share/nvim
 	ln -sf "$(CONFIG_DIR)/nvim" "$(XDG_CONFIG_HOME)/nvim"
-	if [ "$(UNAME)" = "Linux" ]; then \
-		sudo ln -sf "$(CONFIG_DIR)/nvim" "/root/.config/nvim"; \
-	fi
 	nvim --headless +"Lazy! restore" +qa
 
 .PHONY: tmux
