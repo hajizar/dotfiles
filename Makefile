@@ -78,13 +78,14 @@ ghostty:
 	ln -sf "$(CONFIG_DIR)/ghostty" "$(XDG_CONFIG_HOME)/ghostty"
 
 .PHONY: nvim
-## nvim: Setup symlink for nvim configuration
+## nvim: Setup neovim configuration
 nvim:
 	rm -rf $(XDG_CONFIG_HOME)/nvim
 	ln -sf "$(CONFIG_DIR)/nvim" "$(XDG_CONFIG_HOME)/nvim"
 	if [ "$(UNAME)" = "Linux" ]; then \
 		sudo ln -sf "$(CONFIG_DIR)/nvim" "/root/.config/nvim"; \
 	fi
+	nvim --headless +"Lazy! restore" +qa
 
 .PHONY: tmux
 ## tmux: Setup symlink for tmux configuration
