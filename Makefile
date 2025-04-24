@@ -1,6 +1,7 @@
+.DEFAULT_GOAL := help
 DOTFILES_DIR := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 CONFIG_DIR := $(DOTFILES_DIR)/config
-NAME := "dotenv"
+NAME := "dotfiles"
 UNAME := "$(shell uname)"
 XDG_CONFIG_HOME ?= $(HOME)/.config
 
@@ -78,12 +79,12 @@ ghostty:
 	ln -sf "$(CONFIG_DIR)/ghostty" "$(XDG_CONFIG_HOME)/ghostty"
 
 .PHONY: nvim
-## nvim: Setup neovim configuration
+## nvim: Setup and install neovim configuration
 nvim:
 	rm -rf $(XDG_CONFIG_HOME)/nvim
 	rm -rf $(HOME)/.local/share/nvim
 	ln -sf "$(CONFIG_DIR)/nvim" "$(XDG_CONFIG_HOME)/nvim"
-	nvim --headless +"Lazy! restore" +qa
+	nvim --headless +"Lazy! sync" +qa
 
 .PHONY: tmux
 ## tmux: Setup symlink for tmux configuration
