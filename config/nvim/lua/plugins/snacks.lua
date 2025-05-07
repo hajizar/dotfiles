@@ -8,13 +8,7 @@ return {
       },
     },
     keys = {
-      {
-        "<leader>gT",
-        function()
-          Snacks.picker.git_diff()
-        end,
-        desc = "Git Diff (Hunks)",
-      },
+      { "<leader>gd", false },
     },
   },
 }
