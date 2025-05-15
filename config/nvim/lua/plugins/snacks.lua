@@ -5,6 +5,15 @@ return {
       picker = {
         hidden = true,
         ignored = true,
+        exclude = {
+          ".git",
+          ".hypothesis",
+          ".pytest_cache",
+          ".ruff_cache",
+          ".venv",
+          "__pycache__",
+          "node_modules",
+        },
       },
     },
     keys = {
