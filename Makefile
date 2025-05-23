@@ -1,6 +1,7 @@
+.DEFAULT_GOAL := help
 DOTFILES_DIR := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 CONFIG_DIR := $(DOTFILES_DIR)/config
-NAME := "dotenv"
+NAME := "dotfiles"
 UNAME := "$(shell uname)"
 XDG_CONFIG_HOME ?= $(HOME)/.config
 
@@ -23,16 +24,16 @@ bashrc:
 .PHONY: brew
 ## brew: Install brew and brew packages
 brew:
-	which brew >/dev/null 2>&1 || { \
+	@which brew >/dev/null 2>&1 || { \
 		/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; \
-		eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"; \
 	}
-	xargs brew install < $(DOTFILES_DIR)/requirements/brew/packages.txt
-
-.PHONY: brew-sync
-## brew-sync: Update list of brew packages from current system
-brew-sync:
-	brew leaves > $(DOTFILES_DIR)/requirements/brew/packages.txt
+	@if [ "$(UNAME)" = "Darwin" ]; then \
+		export PATH="/opt/homebrew/bin:$(PATH)"; \
+	elif [ "$(UNAME)" = "Linux" ]; then \
+		eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"; \
+	fi; \
+	brewfile="requirements/$(UNAME)/Brewfile"; \
+	brew bundle --file $${brewfile}
 	
 .PHONY: config
 ## config: Setup user configuration
@@ -78,13 +79,12 @@ ghostty:
 	ln -sf "$(CONFIG_DIR)/ghostty" "$(XDG_CONFIG_HOME)/ghostty"
 
 .PHONY: nvim
-## nvim: Setup symlink for nvim configuration
+## nvim: Setup and install neovim configuration
 nvim:
 	rm -rf $(XDG_CONFIG_HOME)/nvim
+	rm -rf $(HOME)/.local/share/nvim
 	ln -sf "$(CONFIG_DIR)/nvim" "$(XDG_CONFIG_HOME)/nvim"
-	if [ "$(UNAME)" = "Linux" ]; then \
-		sudo ln -sf "$(CONFIG_DIR)/nvim" "/root/.config/nvim"; \
-	fi
+	nvim --headless +"Lazy! sync" +qa
 
 .PHONY: tmux
 ## tmux: Setup symlink for tmux configuration

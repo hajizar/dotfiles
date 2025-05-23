@@ -7,7 +7,7 @@ return {
       languages = {
         python = {
           template = {
-            annotation_convention = "reST", -- Set 'reST' as the default docstring format for Python
+            annotation_convention = "reST",
           },
         },
       },
