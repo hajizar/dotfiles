@@ -45,6 +45,7 @@ export PATH="$PATH:/opt/homebrew/opt/libpq/bin"
 export PATH="$HOME/go/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$(npm config get prefix)/bin:$PATH"
 
 export PYTHONWARNINGS="ignore"
 
