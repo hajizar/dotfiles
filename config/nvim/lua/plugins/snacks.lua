@@ -15,6 +15,10 @@ return {
           "node_modules",
         },
       },
+      explorer = {
+        enabled = true,
+        replace_netrw = true,
+      },
     },
     keys = {
       { "<leader>gd", false },
