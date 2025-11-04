@@ -5,6 +5,7 @@
   "bufferline.nvim": { "branch": "main", "commit": "655133c3b4c3e5e05ec549b9f8cc2894ac6f51b3" },
   "catppuccin": { "branch": "main", "commit": "e79d09fa347b367e0e7f693bfe87dba932a8cbd1" },
   "clangd_extensions.nvim": { "branch": "main", "commit": "b67cc417d9020fb4b83d46662351b4d16894905e" },
+  "claudecode.nvim": { "branch": "main", "commit": "1552086ebcce9f4a2ea3b9793018a884d6b60169" },
   "conform.nvim": { "branch": "master", "commit": "9d859cbfbde7a1bd1770e7c97aef30ec5a237a71" },
   "crates.nvim": { "branch": "main", "commit": "ac9fa498a9edb96dc3056724ff69d5f40b898453" },
   "filetype.nvim": { "branch": "main", "commit": "15891eb2b138d54b08aef793c43901910ec6879f" },

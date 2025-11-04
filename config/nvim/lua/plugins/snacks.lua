@@ -5,6 +5,7 @@ return {
       picker = {
         hidden = true,
         ignored = true,
+        follow = true,
         exclude = {
           ".git",
           ".hypothesis",
