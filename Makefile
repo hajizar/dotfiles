@@ -88,6 +88,8 @@ gitconfig:
 	@echo "⚙️  Setting up git configuration..."
 	@rm -f $(HOME)/.gitconfig
 	@ln -sf "$(CONFIG_DIR)/git/.gitconfig" "$(HOME)/.gitconfig"
+	@rm -rf $(XDG_CONFIG_HOME)/gh-dash
+	@ln -sf "$(CONFIG_DIR)/gh-dash" "$(XDG_CONFIG_HOME)/gh-dash"
 	@echo "✅ Git configured!"
 
 .PHONY: ghostty
