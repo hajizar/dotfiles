@@ -31,16 +31,18 @@ bashrc:
 ## brew: 🍺 Install brew and brew packages
 brew:
 	@echo "🍺 Setting up Homebrew..."
-	@if ! command -v brew >/dev/null 2>&1 && [ ! -f "$$HOME/.linuxbrew/bin/brew" ]; then \
-		if [ "$(UNAME)" = "Linux" ]; then \
+	@if [ "$(UNAME)" = "Linux" ]; then \
+		if [ ! -d "$$HOME/.linuxbrew/Homebrew" ]; then \
 			echo "📥 Installing Homebrew locally (Non-root method)..."; \
 			git clone https://github.com/Homebrew/brew "$$HOME/.linuxbrew/Homebrew"; \
-			mkdir -p "$$HOME/.linuxbrew/bin"; \
-			ln -sf "$$HOME/.linuxbrew/Homebrew/bin/brew" "$$HOME/.linuxbrew/bin/brew"; \
-		elif [ "$(UNAME)" = "Darwin" ]; then \
-			echo "📥 Installing Homebrew (Standard macOS)..."; \
-			/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; \
+		else \
+			echo "✔ Homebrew folder already exists. Skipping clone."; \
 		fi; \
+		mkdir -p "$$HOME/.linuxbrew/bin"; \
+		ln -sf "$$HOME/.linuxbrew/Homebrew/bin/brew" "$$HOME/.linuxbrew/bin/brew"; \
+	elif [ "$(UNAME)" = "Darwin" ]; then \
+		echo "📥 Installing Homebrew (Standard macOS)..."; \
+		/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; \
 	fi
 	@echo "📦 Installing packages from Brewfile..."
 	@if [ "$(UNAME)" = "Darwin" ]; then \
