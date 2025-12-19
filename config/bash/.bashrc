@@ -7,6 +7,45 @@ esac
 # Path to your oh-my-bash installation.
 export OSH="$HOME/.oh-my-bash"
 
+# OS segment for powerbash10k
+function __pb10k_prompt_os {
+  local color box info
+
+  color=$_omb_prompt_bold_white
+  box=""
+
+  if [[ "$(uname)" == "Darwin" ]]; then
+    info="macOS"
+  else
+    if [[ -r /etc/os-release ]]; then
+      # shellcheck disable=SC1091
+      . /etc/os-release
+      info="${PRETTY_NAME:-$NAME}"
+    else
+      info="Linux"
+    fi
+  fi
+
+  case "$info" in
+  *Ubuntu*) info=" " ;;
+  *Arch*) info=" " ;;
+  *Debian*) info=" " ;;
+  *Fedora*) info=" " ;;
+  *macOS*) info="" ;;
+  *Rocky* | *Rocky\ Linux*) info=" " ;;
+  *openSUSE*) info=" " ;;
+  *) info=" " ;;
+  esac
+
+  printf "%s|%s|%s|%s" \
+    "$color" \
+    "$info" \
+    "$_omb_prompt_bold_black" \
+    "$box"
+}
+
+__PB10K_TOP_LEFT="os dir scm"
+
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-bash is loaded.
 OSH_THEME="powerbash10k"
