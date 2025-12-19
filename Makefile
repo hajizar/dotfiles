@@ -31,18 +31,30 @@ bashrc:
 ## brew: 🍺 Install brew and brew packages
 brew:
 	@echo "🍺 Setting up Homebrew..."
-	@which brew >/dev/null 2>&1 || { \
-		echo "📥 Installing Homebrew..."; \
-		/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; \
-	}
+	@if ! command -v brew >/dev/null 2>&1 && [ ! -f "$$HOME/.linuxbrew/bin/brew" ]; then \
+		if [ "$(UNAME)" = "Linux" ]; then \
+			echo "📥 Installing Homebrew locally (Non-root method)..."; \
+			rm -rf "$$HOME/.linuxbrew/Homebrew"; \
+			git clone https://github.com/Homebrew/brew "$$HOME/.linuxbrew/Homebrew"; \
+			mkdir -p "$$HOME/.linuxbrew/bin"; \
+			ln -sf "$$HOME/.linuxbrew/Homebrew/bin/brew" "$$HOME/.linuxbrew/bin/brew"; \
+		elif [ "$(UNAME)" = "Darwin" ]; then \
+			echo "📥 Installing Homebrew (Standard macOS)..."; \
+			/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; \
+		fi; \
+	else \
+		echo "✔ Homebrew is already installed. Skipping install."; \
+	fi
 	@echo "📦 Installing packages from Brewfile..."
 	@if [ "$(UNAME)" = "Darwin" ]; then \
-		export PATH="/opt/homebrew/bin:$(PATH)"; \
+		if [ -f "/opt/homebrew/bin/brew" ]; then \
+			eval "$$(/opt/homebrew/bin/brew shellenv)"; \
+		fi; \
 	elif [ "$(UNAME)" = "Linux" ]; then \
-		eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"; \
+		eval "$$($$HOME/.linuxbrew/bin/brew shellenv)"; \
 	fi; \
 	brewfile="requirements/$(UNAME)/Brewfile"; \
-	brew bundle --file $${brewfile}
+	brew bundle --file $$brewfile
 	@echo "✅ Homebrew setup complete!"
 
 .PHONY: config
@@ -87,7 +99,7 @@ fonts:
 gitconfig:
 	@echo "⚙️  Setting up git configuration..."
 	@rm -f $(HOME)/.gitconfig
-	@ln -sf "$(CONFIG_DIR)/git/.gitconfig" "$(HOME)/.gitconfig"
+	@ln -sf "$(CONFIG_DIR)/git/$(UNAME)/.gitconfig" "$(HOME)/.gitconfig"
 	@rm -rf $(XDG_CONFIG_HOME)/gh-dash
 	@ln -sf "$(CONFIG_DIR)/gh-dash" "$(XDG_CONFIG_HOME)/gh-dash"
 	@echo "✅ Git configured!"
