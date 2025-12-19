@@ -132,12 +132,6 @@ alias venv='source .venv/bin/activate'
 alias vim='nvim'
 alias vp='vim ~/.profile'
 
-# User environment variables
-export PATH="$PATH:/snap/bin"
-export PATH="$PATH:/$HOME/.cargo/bin"
-export PATH="$PATH:$HOME/.linuxbrew/bin"
-export PATH="$PATH:$HOME/.linuxbrew/opt/libpq/bin"
-
 # Linux brew setup
 if [ -d "$HOME/.linuxbrew" ] && [ -x "$HOME/.linuxbrew/bin/brew" ]; then
   eval "$($HOME/.linuxbrew/bin/brew shellenv)"
@@ -152,3 +146,10 @@ fi
 if command -v fzf >/dev/null 2>&1; then
   eval "$(nodenv init -)"
 fi
+
+# User environment variables
+export PATH="$PATH:/snap/bin"
+export PATH="$PATH:/$HOME/.cargo/bin"
+export PATH="$PATH:$HOME/.linuxbrew/bin"
+export PATH="$PATH:$HOME/.linuxbrew/opt/libpq/bin"
+export PATH="$(npm config get prefix)/bin:$PATH"
