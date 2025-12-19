@@ -1,0 +1,37 @@
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+
+[user]
+  name = Rufat Hajizada
+  email = rufat.hajizada@schrodinger.com
+
+[core]
+  pager = delta
+
+[pager]
+  log = less
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  navigate = true
+  line-numbers = true
+  side-by-side = true
+
+[merge]
+  conflictStyle = diff3
+
+[diff]
+  colorMoved = default
+	tool = delta
+
+[credential "https://github.com"]
+	helper = 
+	helper = !/home/hajizada/.linuxbrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/home/hajizada/.linuxbrew/bin/gh auth git-credential
