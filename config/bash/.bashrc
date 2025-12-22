@@ -151,8 +151,8 @@ alias vim='nvim'
 alias vp='vim ~/.profile'
 
 # Linux brew setup
-if [ -d "$HOME/.linuxbrew" ] && [ -x "$HOME/.linuxbrew/bin/brew" ]; then
-  eval "$($HOME/.linuxbrew/bin/brew shellenv)"
+if [ -d "/home/linuxbrew/.linuxbrew" ] && [ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
 # Shell integration for 'fzf'
@@ -166,8 +166,15 @@ if command -v fzf >/dev/null 2>&1; then
 fi
 
 # User environment variables
-export PATH="$PATH:/snap/bin"
-export PATH="$PATH:/$HOME/.cargo/bin"
-export PATH="$PATH:$HOME/.linuxbrew/bin"
-export PATH="$PATH:$HOME/.linuxbrew/opt/libpq/bin"
 export PATH="$(npm config get prefix)/bin:$PATH"
+export PATH="$PATH:/$HOME/.cargo/bin"
+export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
+export PATH="$PATH:/home/linuxbrew/.linuxbrew/opt/libpq/bin"
+export PATH="$PATH:/snap/bin"
+export PATH="${PATH:+$PATH:}/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/bin:/home/linuxbrew/sbin"
+export HOMEBREW_PREFIX="/home/linuxbrew"
+export HOMEBREW_CELLAR="/home/linuxbrew/Cellar"
+export HOMEBREW_REPOSITORY="/home/linuxbrew/.linuxbrew"
+export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/bin:/home/linuxbrew/sbin${PATH+:$PATH}"
+export MANPATH="/home/linuxbrew/share/man${MANPATH+:$MANPATH}:"
+export INFOPATH="/home/linuxbrew/share/info:${INFOPATH:-}"

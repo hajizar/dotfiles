@@ -31,15 +31,14 @@ bashrc:
 ## brew: 🍺 Install brew and brew packages
 brew:
 	@echo "🍺 Setting up Homebrew..."
-	@if ! command -v brew >/dev/null 2>&1 && [ ! -f "$$HOME/.linuxbrew/bin/brew" ]; then \
+	@if ! command -v brew >/dev/null 2>&1 && [ ! -f "$/home/linuxbrew/.linuxbrew/bin/brew" ]; then \
+		echo "📥 Installing Homebrew..."; \
 		if [ "$(UNAME)" = "Linux" ]; then \
-			echo "📥 Installing Homebrew locally (Non-root method)..."; \
-			rm -rf "$$HOME/.linuxbrew/Homebrew"; \
-			git clone https://github.com/Homebrew/brew "$$HOME/.linuxbrew/Homebrew"; \
-			mkdir -p "$$HOME/.linuxbrew/bin"; \
-			ln -sf "$$HOME/.linuxbrew/Homebrew/bin/brew" "$$HOME/.linuxbrew/bin/brew"; \
+			rm -rf "/home/linuxbrew/.linuxbrew/Homebrew"; \
+			git clone https://github.com/Homebrew/brew "$/home/linuxbrew/.linuxbrew/Homebrew"; \
+			mkdir -p "/home/linuxbrew/.linuxbrew/bin"; \
+			ln -sf "/home/linuxbrew/.linuxbrew/Homebrew/bin/brew" "$/home/linuxbrew/.linuxbrew/bin/brew"; \
 		elif [ "$(UNAME)" = "Darwin" ]; then \
-			echo "📥 Installing Homebrew (Standard macOS)..."; \
 			/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; \
 		fi; \
 	else \
@@ -51,7 +50,7 @@ brew:
 			eval "$$(/opt/homebrew/bin/brew shellenv)"; \
 		fi; \
 	elif [ "$(UNAME)" = "Linux" ]; then \
-		eval "$$($$HOME/.linuxbrew/bin/brew shellenv)"; \
+		eval "$$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"; \
 	fi; \
 	brewfile="requirements/$(UNAME)/Brewfile"; \
 	brew bundle --file $$brewfile
