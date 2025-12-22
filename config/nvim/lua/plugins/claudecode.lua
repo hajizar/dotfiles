@@ -1,3 +1,5 @@
+local claude = vim.fn.exepath("claude")
+
 return {
   {
     "coder/claudecode.nvim",
@@ -8,7 +10,7 @@ return {
       vim.env.CLOUD_ML_REGION = os.getenv("CLOUD_ML_REGION")
     end,
     opts = {
-      terminal_cmd = "/opt/homebrew/bin/claude",
+      terminal_cmd = claude ~= "" and claude or "claude",
     },
     config = true,
     keys = {
