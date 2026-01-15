@@ -39,6 +39,7 @@ plugins=(alias-finder aliases brew dotenv git gitignore golang python)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+export DO_NOT_TRACK=1
 export EDITOR="nvim"
 export PATH="$PATH:/opt/homebrew/bin"
 export PATH="$PATH:/opt/homebrew/opt/libpq/bin"

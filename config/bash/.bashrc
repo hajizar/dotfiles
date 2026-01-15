@@ -166,6 +166,7 @@ if command -v fzf >/dev/null 2>&1; then
 fi
 
 # User environment variables
+export DO_NOT_TRACK=1
 export PATH="$(npm config get prefix)/bin:$PATH"
 export PATH="$PATH:/$HOME/.cargo/bin"
 export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
