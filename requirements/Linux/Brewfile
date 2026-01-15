@@ -1,4 +1,5 @@
 brew "c-ares"
+brew "charmbracelet/tap/crush"
 brew "clang-format"
 brew "entr"
 brew "fd"

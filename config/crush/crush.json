@@ -1,0 +1,136 @@
+{
+  "$schema": "https://charm.land/crush.json",
+  "lsp": {
+    "go": {
+      "command": "$HOME/.local/share/nvim/mason/bin/gopls"
+    },
+    "c": {
+      "command": "$HOME/.local/share/nvim/mason/bin/clangd"
+    },
+    "cpp": {
+      "command": "$HOME/.local/share/nvim/mason/bin/clangd"
+    },
+    "lua": {
+      "command": "$HOME/.local/share/nvim/mason/bin/lua-language-server"
+    },
+    "python": {
+      "command": "$HOME/.local/share/nvim/mason/bin/pyright-langserver",
+      "args": [
+        "--stdio"
+      ]
+    },
+    "typescript": {
+      "command": "$HOME/.local/share/nvim/mason/bin/vtsls",
+      "args": [
+        "--stdio"
+      ]
+    },
+    "javascript": {
+      "command": "$HOME/.local/share/nvim/mason/bin/vtsls",
+      "args": [
+        "--stdio"
+      ]
+    },
+    "yaml": {
+      "command": "$HOME/.local/share/nvim/mason/bin/yaml-language-server",
+      "args": [
+        "--stdio"
+      ]
+    },
+    "dockerfile": {
+      "command": "$HOME/.local/share/nvim/mason/bin/docker-langserver",
+      "args": [
+        "--stdio"
+      ]
+    },
+    "terraform": {
+      "command": "$HOME/.local/share/nvim/mason/bin/terraform-ls",
+      "args": [
+        "serve"
+      ]
+    },
+    "markdown": {
+      "command": "$HOME/.local/share/nvim/mason/bin/marksman",
+      "args": [
+        "server"
+      ]
+    },
+    "java": {
+      "command": "$HOME/.local/share/nvim/mason/bin/jdtls"
+    },
+    "helm": {
+      "command": "$HOME/.local/share/nvim/mason/bin/helm_ls",
+      "args": [
+        "serve"
+      ]
+    },
+    "json": {
+      "command": "$HOME/.local/share/nvim/mason/bin/vscode-json-language-server",
+      "args": [
+        "--stdio"
+      ]
+    }
+  },
+  "mcp": {
+    "duckduckgo": {
+      "type": "stdio",
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "mcp/duckduckgo"
+      ]
+    },
+    "fetch": {
+      "type": "stdio",
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "mcp/fetch"
+      ]
+    },
+    "github": {
+      "type": "stdio",
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "GITHUB_PERSONAL_ACCESS_TOKEN",
+        "mcp/github"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "$(echo $GH_PAT)"
+      }
+    },
+    "next-devtools-mcp": {
+      "type": "stdio",
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "mcp/next-devtools-mcp"
+      ]
+    },
+    "openapi": {
+      "command": "docker",
+      "type": "stdio",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "MODE",
+        "mcp/openapi"
+      ],
+      "env": {
+        "MODE": "Stdio"
+      }
+    }
+  }
+}

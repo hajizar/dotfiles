@@ -67,6 +67,14 @@ config:
 	fi
 	@echo "✅ Configuration complete!"
 
+.PHONY: crush
+## crush: 🤖 Setup symlink for crush configuration
+crush:
+	@echo "🤖 Setting up crush configuration..."
+	@rm -rf $(XDG_CONFIG_HOME)/crush
+	@ln -sf "$(CONFIG_DIR)/crush" "$(XDG_CONFIG_HOME)/crush"
+	@echo "✅ Crush configured!"
+
 .PHONY: fonts
 ## fonts: 🔤 Setup nerd fonts
 fonts:
