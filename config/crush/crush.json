@@ -117,6 +117,24 @@
         "mcp/next-devtools-mcp"
       ]
     },
+    "dashboard-mcp": {
+      "type": "stdio",
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "DASHBOARD_HOST",
+        "-e",
+        "DASHBOARD_API_KEY",
+        "dashboard-mcp:latest"
+      ],
+      "env": {
+        "DASHBOARD_HOST": "$(echo $DASHBOARD_HOST)",
+        "DASHBOARD_API_KEY": "$(echo $DASHBOARD_API_KEY)"
+      }
+    },
     "openapi": {
       "command": "docker",
       "type": "stdio",
