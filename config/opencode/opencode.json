@@ -4,6 +4,22 @@
   "autoupdate": true,
   "share": "manual",
   "mcp": {
+    "atlassian": {
+      "type": "local",
+      "command": [
+        "docker",
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "JIRA_URL",
+        "-e",
+        "JIRA_USERNAME",
+        "-e",
+        "JIRA_API_TOKEN",
+        "mcp/atlassian"
+      ]
+    },
     "dashboard-mcp": {
       "type": "local",
       "command": [

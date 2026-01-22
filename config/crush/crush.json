@@ -72,6 +72,27 @@
     }
   },
   "mcp": {
+    "atlassian": {
+      "command": "docker",
+      "type": "stdio",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "JIRA_URL",
+        "-e",
+        "JIRA_USERNAME",
+        "-e",
+        "JIRA_API_TOKEN",
+        "mcp/atlassian"
+      ],
+      "env": {
+        "JIRA_URL": "${JIRA_URL}",
+        "JIRA_USERNAME": "${JIRA_USERNAME}",
+        "JIRA_API_TOKEN": "${JIRA_API_TOKEN}"
+      }
+    },
     "dashboard-mcp": {
       "type": "stdio",
       "command": "docker",
