@@ -67,8 +67,16 @@ config:
 	fi
 	@echo "✅ Configuration complete!"
 
+.PHONY: opencode
+## opencode: 🤖 Setup symlink for OpenCode configuration
+opencode:
+	@echo "🤖 Setting up OpenCode configuration..."
+	@rm -f $(XDG_CONFIG_HOME)/opencode/opencode.json
+	@ln -sf "$(CONFIG_DIR)/opencode/opencode.json" $(XDG_CONFIG_HOME)/opencode/opencode.json
+	@echo "✅ OpenCode configured!"
+
 .PHONY: crush
-## crush: 🤖 Setup symlink for crush configuration
+## crush: 🎆 Setup symlink for crush configuration
 crush:
 	@echo "🤖 Setting up crush configuration..."
 	@rm -rf $(XDG_CONFIG_HOME)/crush

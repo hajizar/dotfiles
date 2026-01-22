@@ -72,6 +72,24 @@
     }
   },
   "mcp": {
+    "dashboard-mcp": {
+      "type": "stdio",
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "DASHBOARD_HOST",
+        "-e",
+        "DASHBOARD_API_KEY",
+        "dashboard-mcp:latest"
+      ],
+      "env": {
+        "DASHBOARD_HOST": "$(echo $DASHBOARD_HOST)",
+        "DASHBOARD_API_KEY": "$(echo $DASHBOARD_API_KEY)"
+      }
+    },
     "duckduckgo": {
       "type": "stdio",
       "command": "docker",
@@ -104,7 +122,7 @@
         "mcp/github"
       ],
       "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": "$(echo $GH_PAT)"
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "$(echo $GITHUB_PERSONAL_ACCESS_TOKEN)"
       }
     },
     "next-devtools-mcp": {
@@ -116,24 +134,6 @@
         "--rm",
         "mcp/next-devtools-mcp"
       ]
-    },
-    "dashboard-mcp": {
-      "type": "stdio",
-      "command": "docker",
-      "args": [
-        "run",
-        "-i",
-        "--rm",
-        "-e",
-        "DASHBOARD_HOST",
-        "-e",
-        "DASHBOARD_API_KEY",
-        "dashboard-mcp:latest"
-      ],
-      "env": {
-        "DASHBOARD_HOST": "$(echo $DASHBOARD_HOST)",
-        "DASHBOARD_API_KEY": "$(echo $DASHBOARD_API_KEY)"
-      }
     },
     "openapi": {
       "command": "docker",
@@ -149,6 +149,26 @@
       "env": {
         "MODE": "Stdio"
       }
+    },
+    "playwright": {
+      "command": "docker",
+      "type": "stdio",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "mcp/playwright"
+      ]
+    },
+    "sequentialthinking": {
+      "command": "docker",
+      "type": "stdio",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "mcp/sequentialthinking"
+      ]
     }
   }
 }

@@ -1,0 +1,99 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "theme": "system",
+  "autoupdate": true,
+  "share": "manual",
+  "mcp": {
+    "dashboard-mcp": {
+      "type": "local",
+      "command": [
+        "docker",
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "DASHBOARD_HOST",
+        "-e",
+        "DASHBOARD_API_KEY",
+        "dashboard-mcp:latest"
+      ]
+    },
+    "duckduckgo": {
+      "type": "local",
+      "command": [
+        "docker",
+        "run",
+        "-i",
+        "--rm",
+        "mcp/duckduckgo"
+      ]
+    },
+    "fetch": {
+      "type": "local",
+      "command": [
+        "docker",
+        "run",
+        "-i",
+        "--rm",
+        "mcp/fetch"
+      ]
+    },
+    "github": {
+      "type": "local",
+      "command": [
+        "docker",
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "GITHUB_PERSONAL_ACCESS_TOKEN",
+        "mcp/github"
+      ]
+    },
+    "next-devtools-mcp": {
+      "type": "local",
+      "command": [
+        "docker",
+        "run",
+        "-i",
+        "--rm",
+        "mcp/next-devtools-mcp"
+      ]
+    },
+    "openapi": {
+      "type": "local",
+      "command": [
+        "docker",
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "MODE",
+        "mcp/openapi"
+      ],
+      "environment": {
+        "MODE": "local"
+      }
+    },
+    "playwright": {
+      "type": "local",
+      "command": [
+        "docker",
+        "run",
+        "-i",
+        "--rm",
+        "mcp/playwright"
+      ]
+    },
+    "sequentialthinking": {
+      "type": "local",
+      "command": [
+        "docker",
+        "run",
+        "-i",
+        "--rm",
+        "mcp/sequentialthinking"
+      ]
+    }
+  }
+}
