@@ -166,16 +166,21 @@ if command -v fzf >/dev/null 2>&1; then
 fi
 
 # User environment variables
+export CPPFLAGS="-I/home/linuxbrew/.linuxbrew/opt/glibc/include"
 export DO_NOT_TRACK=1
+export HOMEBREW_CELLAR="/home/linuxbrew/Cellar"
+export HOMEBREW_PREFIX="/home/linuxbrew"
+export HOMEBREW_REPOSITORY="/home/linuxbrew/.linuxbrew"
+export INFOPATH="/home/linuxbrew/share/info:${INFOPATH:-}"
+export LDFLAGS="-L/home/linuxbrew/.linuxbrew/opt/glibc/lib"
+export MANPATH="/home/linuxbrew/share/man${MANPATH+:$MANPATH}:"
 export PATH="$(npm config get prefix)/bin:$PATH"
 export PATH="$PATH:/$HOME/.cargo/bin"
 export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
+export PATH="$PATH:/home/linuxbrew/.linuxbrew/opt/glibc/bin"
+export PATH="$PATH:/home/linuxbrew/.linuxbrew/opt/glibc/sbin"
 export PATH="$PATH:/home/linuxbrew/.linuxbrew/opt/libpq/bin"
 export PATH="$PATH:/snap/bin"
+export PATH="$PATH:$HOME/.local/bin"
 export PATH="${PATH:+$PATH:}/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/bin:/home/linuxbrew/sbin"
-export HOMEBREW_PREFIX="/home/linuxbrew"
-export HOMEBREW_CELLAR="/home/linuxbrew/Cellar"
-export HOMEBREW_REPOSITORY="/home/linuxbrew/.linuxbrew"
 export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/bin:/home/linuxbrew/sbin${PATH+:$PATH}"
-export MANPATH="/home/linuxbrew/share/man${MANPATH+:$MANPATH}:"
-export INFOPATH="/home/linuxbrew/share/info:${INFOPATH:-}"
