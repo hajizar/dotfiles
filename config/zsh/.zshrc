@@ -53,17 +53,11 @@ export PYTHONWARNINGS="ignore"
 # User aliases
 alias fzf='fzf --tmux'
 alias lg='lazygit'
-alias mkvenv='uv venv'
-alias requirements='uv pip install -r requirements.txt'
 alias tf='terraform'
 alias venv='source .venv/bin/activate'
 alias vim='nvim'
-alias vp='vim ~/.profile'
 alias vz='vim ~/.zshrc'
 alias zshrc='source ~/.zshrc'
-
-# Source .profile if it exists
-[[ ! -f $HOME/.profile ]] || source $HOME/.profile
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f $HOME/.p10k.zsh ]] || source $HOME/.p10k.zsh
