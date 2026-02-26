@@ -67,21 +67,18 @@ config:
 	fi
 	@echo "✅ Configuration complete!"
 
-.PHONY: opencode
-## opencode: 🤖 Setup symlink for OpenCode configuration
-opencode:
-	@echo "🤖 Setting up OpenCode configuration..."
-	@rm -f $(XDG_CONFIG_HOME)/opencode/opencode.json
-	@ln -sf "$(CONFIG_DIR)/opencode/opencode.json" $(XDG_CONFIG_HOME)/opencode/opencode.json
-	@echo "✅ OpenCode configured!"
-
-.PHONY: crush
-## crush: 🎆 Setup symlink for crush configuration
-crush:
-	@echo "🤖 Setting up crush configuration..."
-	@rm -rf $(XDG_CONFIG_HOME)/crush
-	@ln -sf "$(CONFIG_DIR)/crush" "$(XDG_CONFIG_HOME)/crush"
-	@echo "✅ Crush configured!"
+.PHONY: claude
+## claude: 🤖 Setup Claude Code configuration and MCP servers
+claude:
+	@echo "🤖 Setting up Claude Code configuration..."
+	@mkdir -p $(HOME)/.claude
+	@rm -f $(HOME)/.claude/settings.json
+	@ln -sf "$(CONFIG_DIR)/claude/settings.json" $(HOME)/.claude/settings.json
+	@if [ ! -f $(HOME)/.claude.json ]; then \
+		echo '{}' > $(HOME)/.claude.json; \
+	fi
+	@jq --slurpfile mcp $(CONFIG_DIR)/claude/mcp.json '.mcpServers = $$mcp[0].mcpServers' $(HOME)/.claude.json > $(HOME)/.claude.json.tmp && mv $(HOME)/.claude.json.tmp $(HOME)/.claude.json
+	@echo "✅ Claude Code configured with MCP servers!"
 
 .PHONY: fonts
 ## fonts: 🔤 Setup nerd fonts

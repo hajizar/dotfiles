@@ -1,0 +1,56 @@
+{
+  "mcpServers": {
+    "atlassian": {
+      "command": "docker",
+      "type": "stdio",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "JIRA_URL",
+        "-e",
+        "JIRA_USERNAME",
+        "-e",
+        "JIRA_API_TOKEN",
+        "mcp/atlassian"
+      ]
+    },
+    "dashboard-mcp": {
+      "command": "docker",
+      "type": "stdio",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "DASHBOARD_HOST",
+        "-e",
+        "DASHBOARD_API_KEY",
+        "dashboard-mcp:latest"
+      ]
+    },
+    "github": {
+      "type": "stdio",
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "GITHUB_PERSONAL_ACCESS_TOKEN",
+        "mcp/github"
+      ]
+    },
+    "playwright": {
+      "command": "docker",
+      "type": "stdio",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "mcp/playwright"
+      ]
+    }
+  }
+}
