@@ -1,5 +1,51 @@
 {
   "apiKeyHelper": "~/.claude/get-iam-token.sh",
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "osascript -e 'display notification \"Claude Code needs your attention\" with title \"Claude Code\" sound name \"Pong\"'"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "osascript -e 'display notification \"Claude has finished working\" with title \"Claude Code\" sound name \"Pong\"'"
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "TOOL=$(cat | jq -r '.tool_name'); osascript -e \"display notification \\\"Tool failed: $TOOL\\\" with title \\\"Claude Code Error\\\" sound name \\\"Pong\\\"\""
+          }
+        ]
+      }
+    ],
+    "StopFailure": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "ERROR=$(cat | jq -r '.error_type // \"unknown\"'); osascript -e \"display notification \\\"API Error: $ERROR\\\" with title \\\"Claude Code Failed\\\" sound name \\\"Pong\\\"\""
+          }
+        ]
+      }
+    ]
+  },
   "statusLine": {
     "type": "command",
     "command": "input=$(cat); ctx=\"\"; pct=$(echo \"$input\" | jq -r \".context_window.remaining_percentage // empty\"); if [ -n \"$pct\" ]; then if [ \"$pct\" -gt 50 ]; then c=\"32\"; elif [ \"$pct\" -gt 25 ]; then c=\"33\"; else c=\"31\"; fi; ctx=$(printf \"Context: \\033[01;%sm%s%%\\033[0m\" \"$c\" \"$pct\"); fi; cost=$(echo \"$input\" | jq -r \".cost.total_cost_usd // empty\"); cs=\"\"; if [ -n \"$cost\" ]; then cost=$(printf \"%.2f\" \"$cost\"); sep=\"\"; [ -n \"$ctx\" ] && sep=\" | \"; cs=$(printf \"%sCost: \\033[01;33m$%s\\033[0m\" \"$sep\" \"$cost\"); fi; model=$(echo \"$input\" | jq -r \".model.display_name // .model.id // empty\"); ms=\"\"; if [ -n \"$model\" ]; then [ -n \"$ctx$cs\" ] && sep=\" | \" || sep=\"\"; ms=$(printf \"%sModel: \\033[01;35m%s\\033[0m\" \"$sep\" \"$model\"); fi; printf \"%b%b%b\" \"$ctx\" \"$cs\" \"$ms\""
