@@ -38,27 +38,6 @@ plugins=(alias-finder aliases brew dotenv git gitignore golang python)
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
-export DO_NOT_TRACK=1
-export EDITOR="nvim"
-export PATH="$PATH:/opt/homebrew/bin"
-export PATH="$PATH:/opt/homebrew/opt/libpq/bin"
-export PATH="$HOME/go/bin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$(npm config get prefix)/bin:$PATH"
-
-export PYTHONWARNINGS="ignore"
-
-# User aliases
-alias fzf='fzf --tmux'
-alias lg='lazygit'
-alias tf='terraform'
-alias venv='source .venv/bin/activate'
-alias vim='nvim'
-alias vz='vim ~/.zshrc'
-alias zshrc='source ~/.zshrc'
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f $HOME/.p10k.zsh ]] || source $HOME/.p10k.zsh
 
@@ -85,3 +64,24 @@ source <(fzf --zsh)
 
 # Initializing nodenv
 eval "$(nodenv init -)"
+
+# User configuration
+export DO_NOT_TRACK=1
+export EDITOR="nvim"
+export PATH="$PATH:/opt/homebrew/bin"
+export PATH="$PATH:/opt/homebrew/opt/libpq/bin"
+export PATH="$HOME/go/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$(npm config get prefix)/bin:$PATH"
+export PYTHONWARNINGS="ignore"
+
+# User aliases
+alias fzf='fzf --tmux'
+alias lg='lazygit'
+alias tf='terraform'
+alias venv='source .venv/bin/activate'
+alias vim='nvim'
+alias vz='vim ~/.zshrc'
+alias zshrc='source ~/.zshrc'
+
