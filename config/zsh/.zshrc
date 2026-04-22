@@ -65,6 +65,9 @@ source <(fzf --zsh)
 # Initializing nodenv
 eval "$(nodenv init -)"
 
+# Rustup setup
+[[ ! -f "$HOME/.cargo/env" ]] || source "$HOME/.cargo/env"
+
 # User configuration
 export DO_NOT_TRACK=1
 export EDITOR="nvim"

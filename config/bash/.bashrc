@@ -165,6 +165,9 @@ if command -v fzf >/dev/null 2>&1; then
   eval "$(nodenv init -)"
 fi
 
+# Rustup setup
+[[ ! -f "$HOME/.cargo/env" ]] || source "$HOME/.cargo/env"
+
 # User environment variables
 export CPPFLAGS="-I/home/linuxbrew/.linuxbrew/opt/glibc/include"
 export DO_NOT_TRACK=1
