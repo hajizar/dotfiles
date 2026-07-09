@@ -2,7 +2,7 @@
 DOTFILES_DIR := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 CONFIG_DIR := $(DOTFILES_DIR)/config
 NAME := "dotfiles"
-UNAME := "$(shell uname)"
+UNAME := $(shell uname)
 XDG_CONFIG_HOME ?= $(HOME)/.config
 BACKUP_DIR := $(HOME)/.dotfiles.backup.$(shell date +%Y%m%d_%H%M%S)
 
@@ -31,13 +31,13 @@ bashrc:
 ## brew: 🍺 Install brew and brew packages
 brew:
 	@echo "🍺 Setting up Homebrew..."
-	@if ! command -v brew >/dev/null 2>&1 && [ ! -f "$/home/linuxbrew/.linuxbrew/bin/brew" ]; then \
+	@if ! command -v brew >/dev/null 2>&1 && [ ! -f "/home/linuxbrew/.linuxbrew/bin/brew" ]; then \
 		echo "📥 Installing Homebrew..."; \
 		if [ "$(UNAME)" = "Linux" ]; then \
 			rm -rf "/home/linuxbrew/.linuxbrew/Homebrew"; \
-			git clone https://github.com/Homebrew/brew "$/home/linuxbrew/.linuxbrew/Homebrew"; \
+			git clone https://github.com/Homebrew/brew "/home/linuxbrew/.linuxbrew/Homebrew"; \
 			mkdir -p "/home/linuxbrew/.linuxbrew/bin"; \
-			ln -sf "/home/linuxbrew/.linuxbrew/Homebrew/bin/brew" "$/home/linuxbrew/.linuxbrew/bin/brew"; \
+			ln -sf "/home/linuxbrew/.linuxbrew/Homebrew/bin/brew" "/home/linuxbrew/.linuxbrew/bin/brew"; \
 		elif [ "$(UNAME)" = "Darwin" ]; then \
 			/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; \
 		fi; \
@@ -275,4 +275,3 @@ help: Makefile
 	@echo
 	@sed -n 's/^##//p' $< | column -t -s ':' |  sed -e 's/^/ /'
 	@echo
-
