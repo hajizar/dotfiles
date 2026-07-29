@@ -46,10 +46,10 @@ zstyle ':omz:plugins:alias-finder' autoload yes
 zstyle ':omz:plugins:alias-finder' cheaper yes
 
 # Update PATH for the Google Cloud SDK
-if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/path.zsh.inc"; fi
+if [ -f "$HOMEBREW_PREFIX/share/google-cloud-sdk/path.zsh.inc" ]; then . "$HOMEBREW_PREFIX/share/google-cloud-sdk/path.zsh.inc"; fi
 
 # Enable shell command completion for gcloud
-if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
+if [ -f "$HOMEBREW_PREFIX/share/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOMEBREW_PREFIX/share/google-cloud-sdk/completion.zsh.inc"; fi
 
 # Enable shell command completion for packages installed with Homebrew
 if type brew &>/dev/null; then
@@ -71,8 +71,8 @@ eval "$(nodenv init -)"
 # User configuration
 export DO_NOT_TRACK=1
 export EDITOR="nvim"
-export PATH="$PATH:/opt/homebrew/bin"
-export PATH="$PATH:/opt/homebrew/opt/libpq/bin"
+export PATH="$PATH:$HOMEBREW_PREFIX/bin"
+export PATH="$PATH:$HOMEBREW_PREFIX/opt/libpq/bin"
 export PATH="$HOME/go/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
