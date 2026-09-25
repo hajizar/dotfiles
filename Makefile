@@ -129,9 +129,6 @@ fonts:
 ## gitconfig: ⚙️ Setup symlink for gitconfig
 gitconfig:
 	@echo "⚙️  Setting up git configuration..."
-ifeq ($(CONFIG_PLATFORM),Windows)
-	@mkdir -p "$(XDG_CONFIG_HOME)"
-endif
 	@rm -f $(HOME)/.gitconfig
 	@ln -sf "$(CONFIG_DIR)/git/$(CONFIG_PLATFORM)/.gitconfig" "$(HOME)/.gitconfig"
 	@rm -rf $(XDG_CONFIG_HOME)/gh-dash
@@ -150,9 +147,6 @@ ghostty:
 ## nvim: 📝 Setup and install neovim configuration
 nvim:
 	@echo "📝 Setting up neovim configuration..."
-ifeq ($(CONFIG_PLATFORM),Windows)
-	@mkdir -p "$(XDG_CONFIG_HOME)"
-endif
 	@rm -rf $(XDG_CONFIG_HOME)/nvim
 	@ln -sf "$(CONFIG_DIR)/nvim" "$(XDG_CONFIG_HOME)/nvim"
 	@echo "📦 Installing Lazy plugins..."
@@ -163,9 +157,6 @@ endif
 ## tmux: 🖼️ Setup symlink for tmux configuration
 tmux:
 	@echo "🖼️ Setting up tmux configuration..."
-ifeq ($(CONFIG_PLATFORM),Windows)
-	@mkdir -p "$(HOME)/.tmux/plugins"
-endif
 	@if [ ! -d "$(HOME)/.tmux/plugins/tpm" ]; then \
 		echo "📥 Installing tmux plugin manager..."; \
 		git clone https://github.com/tmux-plugins/tpm $(HOME)/.tmux/plugins/tpm; \
