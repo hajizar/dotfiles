@@ -3,6 +3,7 @@ DOTFILES_DIR := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 CONFIG_DIR := $(DOTFILES_DIR)/config
 NAME := "dotfiles"
 UNAME := $(shell uname)
+BASH_CONFIG ?= $(CONFIG_DIR)/bash/.bashrc
 XDG_CONFIG_HOME ?= $(HOME)/.config
 BACKUP_DIR := $(HOME)/.dotfiles.backup.$(shell date +%Y%m%d_%H%M%S)
 
@@ -24,8 +25,13 @@ bashrc:
 		git clone https://github.com/ohmybash/oh-my-bash.git $(HOME)/.oh-my-bash; \
 	fi
 	@rm -f $(HOME)/.bashrc.conf
-	@ln -sf "$(CONFIG_DIR)/bash/.bashrc" "$(HOME)/.bashrc"
+	@ln -sf "$(BASH_CONFIG)" "$(HOME)/.bashrc"
 	@echo "✅ Bash configured!"
+
+.PHONY: msys2
+## msys2: 🪟 Setup the MSYS2 Bash configuration
+msys2: BASH_CONFIG = $(CONFIG_DIR)/msys2/.bashrc
+msys2: bashrc
 
 .PHONY: brew
 ## brew: 🍺 Install brew and brew packages
@@ -64,6 +70,8 @@ config:
 			$(MAKE) bashrc gitconfig nvim tmux; \
 	elif [ "$(UNAME)" = "Darwin" ]; then \
 			$(MAKE) zshrc gitconfig nvim tmux ghostty; \
+	elif echo "$(UNAME)" | grep -q '^MSYS_NT'; then \
+			$(MAKE) msys2; \
 	fi
 	@echo "✅ Configuration complete!"
 
