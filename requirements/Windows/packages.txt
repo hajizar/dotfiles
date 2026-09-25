@@ -1,5 +1,5 @@
 # MSYS2 UCRT64 packages. Install from the UCRT64 terminal with make msys2-deps.
-# Keep MSYS packages unprefixed; use the UCRT64 prefix for native Windows tools.
+# Native Windows packages use the UCRT64 package names expected by pacman.
 git
 bash-completion
 tmux

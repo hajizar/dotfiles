@@ -4,6 +4,10 @@ CONFIG_DIR := $(DOTFILES_DIR)/config
 NAME := "dotfiles"
 UNAME := $(shell uname)
 BASH_CONFIG ?= $(CONFIG_DIR)/bash/.bashrc
+CONFIG_PLATFORM := $(UNAME)
+ifneq ($(findstring MSYS_NT,$(UNAME)),)
+CONFIG_PLATFORM := Windows
+endif
 XDG_CONFIG_HOME ?= $(HOME)/.config
 BACKUP_DIR := $(HOME)/.dotfiles.backup.$(shell date +%Y%m%d_%H%M%S)
 
@@ -82,7 +86,7 @@ config:
 	elif [ "$(UNAME)" = "Darwin" ]; then \
 			$(MAKE) zshrc gitconfig nvim tmux ghostty; \
 	elif echo "$(UNAME)" | grep -q '^MSYS_NT'; then \
-			$(MAKE) msys2; \
+			$(MAKE) msys2 gitconfig nvim tmux; \
 	fi
 	@echo "✅ Configuration complete!"
 
@@ -130,7 +134,7 @@ fonts:
 gitconfig:
 	@echo "⚙️  Setting up git configuration..."
 	@rm -f $(HOME)/.gitconfig
-	@ln -sf "$(CONFIG_DIR)/git/$(UNAME)/.gitconfig" "$(HOME)/.gitconfig"
+	@ln -sf "$(CONFIG_DIR)/git/$(CONFIG_PLATFORM)/.gitconfig" "$(HOME)/.gitconfig"
 	@rm -rf $(XDG_CONFIG_HOME)/gh-dash
 	@ln -sf "$(CONFIG_DIR)/gh-dash" "$(XDG_CONFIG_HOME)/gh-dash"
 	@echo "✅ Git configured!"
@@ -148,7 +152,6 @@ ghostty:
 nvim:
 	@echo "📝 Setting up neovim configuration..."
 	@rm -rf $(XDG_CONFIG_HOME)/nvim
-	@rm -rf $(HOME)/.local/share/nvim
 	@ln -sf "$(CONFIG_DIR)/nvim" "$(XDG_CONFIG_HOME)/nvim"
 	@echo "📦 Installing Lazy plugins..."
 	@nvim --headless +"Lazy! sync" +qa
@@ -163,7 +166,7 @@ tmux:
 		git clone https://github.com/tmux-plugins/tpm $(HOME)/.tmux/plugins/tpm; \
 	fi
 	@rm -f $(HOME)/.tmux.conf
-	@ln -sf "$(CONFIG_DIR)/tmux/$(UNAME)/.tmux.conf" "$(HOME)/.tmux.conf"
+	@ln -sf "$(CONFIG_DIR)/tmux/$(CONFIG_PLATFORM)/.tmux.conf" "$(HOME)/.tmux.conf"
 	@echo "✅ Tmux configured!"
 
 .PHONY: zshrc
