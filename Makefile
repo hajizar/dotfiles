@@ -33,6 +33,17 @@ bashrc:
 msys2: BASH_CONFIG = $(CONFIG_DIR)/msys2/.bashrc
 msys2: bashrc
 
+.PHONY: msys2-deps
+## msys2-deps: 📦 Install Windows CLI dependencies from the MSYS2 UCRT64 package list
+msys2-deps:
+	@if [ "$$MSYSTEM" != "UCRT64" ]; then \
+		echo "❌ Run this target from the MSYS2 UCRT64 terminal (MSYSTEM=$$MSYSTEM)."; \
+		exit 1; \
+	fi
+	@echo "📦 Installing MSYS2 UCRT64 packages..."
+	@pacman -S --needed $$(grep -Ev '^[[:space:]]*(#|$$)' requirements/Windows/packages.txt)
+	@echo "✅ MSYS2 packages installed!"
+
 .PHONY: brew
 ## brew: 🍺 Install brew and brew packages
 brew:
