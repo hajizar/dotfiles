@@ -5,7 +5,7 @@ NAME := "dotfiles"
 UNAME := $(shell uname)
 BASH_CONFIG ?= $(CONFIG_DIR)/bash/.bashrc
 CONFIG_PLATFORM := $(UNAME)
-ifneq ($(findstring MSYS_NT,$(UNAME)),)
+ifneq ($(findstring _NT,$(UNAME)),)
 CONFIG_PLATFORM := Windows
 endif
 XDG_CONFIG_HOME ?= $(HOME)/.config
@@ -81,7 +81,7 @@ config:
 			$(MAKE) bashrc gitconfig nvim tmux; \
 	elif [ "$(UNAME)" = "Darwin" ]; then \
 			$(MAKE) zshrc gitconfig nvim tmux ghostty; \
-	elif echo "$(UNAME)" | grep -q '^MSYS_NT'; then \
+	elif echo "$(UNAME)" | grep -q '_NT'; then \
 			$(MAKE) msys2 gitconfig nvim tmux; \
 	fi
 	@echo "✅ Configuration complete!"
