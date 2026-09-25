@@ -4,10 +4,6 @@ CONFIG_DIR := $(DOTFILES_DIR)/config
 NAME := "dotfiles"
 UNAME := $(shell uname)
 BASH_CONFIG ?= $(CONFIG_DIR)/bash/.bashrc
-CONFIG_PLATFORM := $(UNAME)
-ifneq ($(findstring _NT,$(UNAME)),)
-CONFIG_PLATFORM := Windows
-endif
 XDG_CONFIG_HOME ?= $(HOME)/.config
 BACKUP_DIR := $(HOME)/.dotfiles.backup.$(shell date +%Y%m%d_%H%M%S)
 
@@ -129,11 +125,14 @@ fonts:
 ## gitconfig: ⚙️ Setup symlink for gitconfig
 gitconfig:
 	@echo "⚙️  Setting up git configuration..."
-	@rm -f $(HOME)/.gitconfig
-	@ln -sf "$(CONFIG_DIR)/git/$(CONFIG_PLATFORM)/.gitconfig" "$(HOME)/.gitconfig"
-	@rm -rf $(XDG_CONFIG_HOME)/gh-dash
-	@ln -sf "$(CONFIG_DIR)/gh-dash" "$(XDG_CONFIG_HOME)/gh-dash"
-	@echo "✅ Git configured!"
+	@config_platform="$(UNAME)"; \
+	case "$$config_platform" in *_NT*) config_platform=Windows ;; esac; \
+	set -e; \
+	rm -f "$(HOME)/.gitconfig"; \
+	ln -sf "$(CONFIG_DIR)/git/$$config_platform/.gitconfig" "$(HOME)/.gitconfig"; \
+	rm -rf "$(XDG_CONFIG_HOME)/gh-dash"; \
+	ln -sf "$(CONFIG_DIR)/gh-dash" "$(XDG_CONFIG_HOME)/gh-dash"; \
+	echo "✅ Git configured!"
 
 .PHONY: ghostty
 ## ghostty: 👻 Setup symlink for ghostty
@@ -147,8 +146,15 @@ ghostty:
 ## nvim: 📝 Setup and install neovim configuration
 nvim:
 	@echo "📝 Setting up neovim configuration..."
-	@rm -rf $(XDG_CONFIG_HOME)/nvim
-	@ln -sf "$(CONFIG_DIR)/nvim" "$(XDG_CONFIG_HOME)/nvim"
+	@nvim_config_dir="$(XDG_CONFIG_HOME)/nvim"; \
+	if echo "$(UNAME)" | grep -q '_NT'; then \
+		localappdata=$$(cygpath -u "$$LOCALAPPDATA") || exit 1; \
+		if [ -z "$$localappdata" ]; then echo "❌ LOCALAPPDATA is not set."; exit 1; fi; \
+		nvim_config_dir="$$localappdata/nvim"; \
+	fi; \
+	set -e; \
+	rm -rf "$$nvim_config_dir"; \
+	ln -sf "$(CONFIG_DIR)/nvim" "$$nvim_config_dir"
 	@echo "📦 Installing Lazy plugins..."
 	@nvim --headless +"Lazy! sync" +qa
 	@echo "✅ Neovim configured!"
@@ -161,9 +167,12 @@ tmux:
 		echo "📥 Installing tmux plugin manager..."; \
 		git clone https://github.com/tmux-plugins/tpm $(HOME)/.tmux/plugins/tpm; \
 	fi
-	@rm -f $(HOME)/.tmux.conf
-	@ln -sf "$(CONFIG_DIR)/tmux/$(CONFIG_PLATFORM)/.tmux.conf" "$(HOME)/.tmux.conf"
-	@echo "✅ Tmux configured!"
+	@config_platform="$(UNAME)"; \
+	case "$$config_platform" in *_NT*) config_platform=Windows ;; esac; \
+	set -e; \
+	rm -f "$(HOME)/.tmux.conf"; \
+	ln -sf "$(CONFIG_DIR)/tmux/$$config_platform/.tmux.conf" "$(HOME)/.tmux.conf"; \
+	echo "✅ Tmux configured!"
 
 .PHONY: zshrc
 ## zshrc: 🐚 Setup symlink for zsh configuration
@@ -243,7 +252,9 @@ doctor:
 	fi
 	@ls -la $(HOME)/.gitconfig 2>/dev/null | grep -q "$(CONFIG_DIR)" && echo "  ✅ .gitconfig" || echo "  ❌ .gitconfig"
 	@ls -la $(HOME)/.tmux.conf 2>/dev/null | grep -q "$(CONFIG_DIR)" && echo "  ✅ .tmux.conf" || echo "  ❌ .tmux.conf"
-	@ls -la $(XDG_CONFIG_HOME)/nvim 2>/dev/null | grep -q "$(CONFIG_DIR)" && echo "  ✅ nvim" || echo "  ❌ nvim"
+	@nvim_config_dir="$(XDG_CONFIG_HOME)/nvim"; \
+	if echo "$(UNAME)" | grep -q '_NT'; then localappdata=$$(cygpath -u "$$LOCALAPPDATA") || exit 1; [ -n "$$localappdata" ] || exit 1; nvim_config_dir="$$localappdata/nvim"; fi; \
+	ls -la "$$nvim_config_dir" 2>/dev/null | grep -q "$(CONFIG_DIR)" && echo "  ✅ nvim" || echo "  ❌ nvim"
 
 .PHONY: backup
 ## backup: 💾 Backup existing configs before installation
@@ -255,7 +266,9 @@ backup:
 	@[ -f "$(HOME)/.bashrc" ] && cp $(HOME)/.bashrc $(BACKUP_DIR)/ || true
 	@[ -f "$(HOME)/.gitconfig" ] && cp $(HOME)/.gitconfig $(BACKUP_DIR)/ || true
 	@[ -f "$(HOME)/.tmux.conf" ] && cp $(HOME)/.tmux.conf $(BACKUP_DIR)/ || true
-	@[ -d "$(XDG_CONFIG_HOME)/nvim" ] && cp -r $(XDG_CONFIG_HOME)/nvim $(BACKUP_DIR)/ || true
+	@nvim_config_dir="$(XDG_CONFIG_HOME)/nvim"; \
+	if echo "$(UNAME)" | grep -q '_NT'; then localappdata=$$(cygpath -u "$$LOCALAPPDATA") || exit 1; [ -n "$$localappdata" ] || exit 1; nvim_config_dir="$$localappdata/nvim"; fi; \
+	[ -d "$$nvim_config_dir" ] && cp -r "$$nvim_config_dir" "$(BACKUP_DIR)/" || true
 	@[ -d "$(XDG_CONFIG_HOME)/alacritty" ] && cp -r $(XDG_CONFIG_HOME)/alacritty $(BACKUP_DIR)/ || true
 	@[ -d "$(XDG_CONFIG_HOME)/ghostty" ] && cp -r $(XDG_CONFIG_HOME)/ghostty $(BACKUP_DIR)/ || true
 	@echo "✅ Backup complete: $(BACKUP_DIR)"
@@ -268,7 +281,9 @@ clean:
 	@rm -f $(HOME)/.bashrc
 	@rm -f $(HOME)/.gitconfig
 	@rm -f $(HOME)/.tmux.conf
-	@rm -rf $(XDG_CONFIG_HOME)/nvim
+	@nvim_config_dir="$(XDG_CONFIG_HOME)/nvim"; \
+	if echo "$(UNAME)" | grep -q '_NT'; then localappdata=$$(cygpath -u "$$LOCALAPPDATA") || exit 1; [ -n "$$localappdata" ] || exit 1; nvim_config_dir="$$localappdata/nvim"; fi; \
+	rm -rf "$$nvim_config_dir"
 	@rm -rf $(XDG_CONFIG_HOME)/alacritty
 	@rm -rf $(XDG_CONFIG_HOME)/ghostty
 	@echo "✅ Cleanup complete"
