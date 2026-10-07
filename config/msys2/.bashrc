@@ -134,3 +134,7 @@ if command -v npm >/dev/null 2>&1; then
 fi
 
 export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
+export PATH="/c/Program Files/GitHub CLI:$PATH"
+export PATH="/c/Program Files/Neovim/bin:$PATH"
+export PATH="/c/Program Files/Delta:$PATH"
+export PATH="/c/Program Files (x86)/Google/Cloud SDK/google-cloud-sdk/bin:$PATH"
