@@ -92,7 +92,7 @@ fonts:
 		echo "❌ Unsupported OS: $(UNAME)"; exit 1; \
 	fi; \
 	cd /tmp && { \
-		for FONT in JetBrainsMono; do \
+		for FONT in JetBrainsMono UbuntuMono; do \
 			echo "📥 Downloading $$FONT..."; \
 			wget -q https://github.com/ryanoasis/nerd-fonts/releases/latest/download/$${FONT}.zip && \
 			unzip -q $${FONT}.zip -d $${FONT} && \
